@@ -1,0 +1,141 @@
+<html>
+  <head>
+    <script src="p5.min.js"></script>
+    <script>let img1;
+let img2;
+let img3; 
+let img4;
+let img5; 
+let img6;
+let img7;
+let a; let d; let b;
+let filters; let r1; let r2; let randfilt1; let randfilt2;
+
+function preload(){
+colorMode(HSB, 100);
+let filters = ['DILATE','GRAY','INVERT','THRESHOLD','ERODE','BLUR, 6','BLUR,0','POSTERIZE,10','posterize,4','BLUR,10'];
+
+let r1 =random(0,9);
+let r2 =random(0,9);
+let randfilt1 = filters[r1] ;
+let randfilt2 = filters[r2] ;
+
+img1 = loadImage("tinypic18/" + int(random(1,8400)) + ".jpg");
+img2 = loadImage("tinypic18/" + int(random(1,8400)) + ".jpg");
+img3 = loadImage("tinypic18/" + int(random(1,8400)) + ".jpg");
+img4 = loadImage("tinypic18/" + int(random(1,8400)) + ".jpg");
+
+mask1 = loadImage("masks/mask" + int(random(1,34)) + ".png");
+mask2 = loadImage("masks/mask" + int(random(1,34)) + ".png");
+mask3 = loadImage("masks/mask" + int(random(1,31)) + ".png");
+mask4 = loadImage("masks/mask" + int(random(1,31)) + ".png");
+
+d = int(random(1,240));
+a = int(random(1,240));
+b = int(random(1,240));
+
+colorMode(HSB, 100);
+
+}
+
+
+function setup(){
+
+
+
+ colorMode(HSB, 100);
+ img1.resize(600,600);
+ img2.resize(600,600);
+ img3.resize(600,600);
+ img4.resize(600,600);
+createCanvas(600, 600);
+
+}
+
+
+
+
+function draw(){
+colorMode(HSB, 100);
+
+  img1.mask(mask1);
+  img2.mask(mask2);
+  img3.mask(mask3);
+  img4.mask(mask4);
+
+
+background(random(255),random(255),random(255));
+
+blend(img1, 0, 0,600,600, 0, 0,600,600, SUBTRACT);	
+filter(THRESHOLD);
+blend(img3, 0, 0,600,600, 0, 0,600,600, DIFFERENCE);	
+blend(img4, 0, 0,600,600, 0, 0,600,600, DARKEST);	
+blend(img1, 0, 0,600,600, 0, 0,600,600, ADD);
+filter(THRESHOLD);
+let inc=random(1,120);
+let inc2=random(1,600);
+let inc3=random(1,600);
+let randlocX=random(1,600);
+let randlocY=random(-600,1200);
+let randlocX2=random(1,600);
+let randlocY2=random(-600,1200);
+
+filter(POSTERIZE,random(40));
+blend(img1, 0, 0,600,600, 0, 0,600,600, DARKEST);
+blend(img3, 0, 0,600,600, 0, 0,600,600, LIGHTEST);
+blend(img4, 0, 0,600,600, 0, 0,600,600, DARKEST);
+
+for(let i=0;i<200;i=i+inc){
+image(img1, randlocY2, i-inc3,randlocX2,randlocX2);
+}
+
+
+	
+	
+
+	
+noLoop();
+}</script>
+  </head>
+<title>Random Art Generator by Cybergrunge.net</title>
+	
+<style>
+	a{text-decoration:none;border:4px outset gray;background-color:#ccc;color:black;}
+	a:hover{border:4px inset gray;background:#aaa}
+	</style>
+<script>
+let selected = ["RandomArt2.html","RandomArt2.html","RandomArt2.html","RandomArt.html","RandomArt2.html","RandomArt.html","RandomArt2.html","RandomArt.html"];
+function bigbutthole(){
+document.getElementById("clicky").href = selected[Math.floor(Math.random()*selected.length)];
+}
+
+</script>
+  <body style="background-color:#000;color:white;" onmouseover="bigbutthole()">
+<a id="clicky" href="RandomArt.html">Click to Generate New Art</a> <br><font size=3>
+IF the app fails to load after 2 SECONDS, please try again<br>
+due to experimental nature it fails often<br>
+  
+<div style="position:absolute;width:400;top:675;">
+<br>
+
+
+
+	Please refresh the page to create a new piece of unique Cybergrunge Art. <br> Allow some time for image to generate properly !<br> 
+feel free to use any results at your own risk.<br>
+created by <a href="http://cybergrunge.net/" style="color:green">www.cybergrunge.net</a><br>
+	made with Processing and javascript.  <br>
+<br>current count of over 3,500 unique source images<br>
+<i>new images added ~monthly</i><br><br>
+
+<font style="background-color:yellow;color:black">NEW!</font><a href="RandomArt2.html" style="background-color:red;color:black">Alternate Version</a> <font style="color:cyan">- This version relies more heavily on the "threshold" filter and also uses more source images for noisier and more chaotic results.</font> <br><br>
+
+<br><br>
+
+If you use any images from this tool, please consider donating to CYBERGRUNGE.NET, it is greatly appreciated!<br>
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"><input type="hidden" name="cmd" value="_donations" /><input type="hidden" name="business" value="carrierm89@gmail.com" /><input type="hidden" name="currency_code" value="USD" /><input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" /><img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+</form><br><br>This tool is provided as-is for educational purposes. some images may be inappropriate. any copyrights are property of their respective owner(s), at least for the time being until intellectual property laws are completely repealed and all monopolist capitalist corporations are (peacefully) disolved.<br><br>
+</div> 
+
+</body>
+</html>
