@@ -1,22 +1,118 @@
 <html>
   <head>
     <script src="p5.min.js"></script>
-    <script src="sketch.js"></script>
+    <script>
+let img1;
+let img2;
+let img3; 
+let img4;
+let a; let d; let b;
+let filters; let r1; let r2; let randfilt1; let randfilt2;
+
+
+
+
+
+function preload(){
+
+colorMode(HSB, 100);
+let filters = ['DILATE','GRAY','INVERT','THRESHOLD','ERODE','BLUR, 6','BLUR,0','POSTERIZE,10','posterize,4','BLUR,10'];
+
+
+let r1 =random(0,9);
+let r2 =random(0,9);
+
+let randfilt1 = filters[r1] ;
+
+let randfilt2 = filters[r2] ;
+
+img1 = loadImage("tinypic18/" + int(random(1,8966)) + ".jpg");
+img2 = loadImage("tinypic18/" + int(random(1,8966)) + ".jpg");
+img3 = loadImage("tinypic18/" + int(random(1,8966)) + ".jpg");
+img4 = loadImage("tinypic18/" + int(random(1,8966)) + ".jpg");
+
+d = int(random(1,240));
+a = int(random(1,240));
+
+b = int(random(1,240));
+
+colorMode(HSB, 100);
+
+}
+
+
+function setup(){
+
+
+
+ colorMode(HSB, 100);
+createCanvas(500, 500);
+ 
+tint(random(1,100), random(1,100), random(1,100), random(1,100));
+ img1.resize(500,500);
+ 
+tint(random(1,100), random(1,100), random(1,100), random(1,100));
+ img2.resize(500,500);
+ 
+tint(random(1,100), random(1,100), random(1,100), random(1,100));
+ img3.resize(500,500);
+
+frameRate(1);
+
+}
+
+
+
+
+function draw(){
+
+
+  colorMode(HSB, 100);
+
+img1.resize(500,500);
+
+img2.resize(500,500);
+  
+img3.resize(500,500);
+
+img4.resize(500,500);
+  
+
+background(d, a, b);
+blend(img3, 0, 0,500,500, 0, 0,500,500, DARKEST);
+tint(random(1,100), random(1,100), random(1,100), random(1,100));
+
+blend(img1, 0, 0,500,500, 0, 0,500,500, DIFFERENCE);
+tint(random(1,100), random(1,100), random(1,100), random(1,100));
+
+blend(img4, 0, 0,500,500, 0, 0,500,500, HARD_LIGHT);
+
+tint(random(1,100), random(1,100), random(1,100), random(1,100));
+
+blend(img2, 0, 0,500,500, 0, 0,500,500, DIFFERENCE);
+tint(random(1,100), random(1,100), random(1,100), random(1,100));
+}
+</script>
   </head>
 <title>Random Art Generator by Cybergrunge.net</title>
 <style>
-	a{text-decoration:none;border:4px outset gray;background-color:#ccc;color:black;}
-	a:hover{border:4px inset gray;background:#aaa}
+	a{text-decoration:none;border:4px outset gray;background-color:#ccc;color:black;font-size:12px}
+	a:hover{border:4px inset gray;background:#aaa;font-size:12px}
 	</style>
-  <body style="background-color:#000;color:white;" onmouseover="bigbutthole()">
-<a id="clicky" href="RandomArt.html">Click to Generate New Art</a> <br><font size=3>
-if app fails to load after a few seconds try again<br>
+  <body style="background-color:#000;color:white;">
+
+<a style="padding:3px;" href="RandomArt.html">Version 1</a>
+<a style="padding:3px;" href="RandomArt2.html">Hi-Contrast</a> 
+<a style="padding:3px;" href="RandomArt3.html">V3:Echoes</a> 
+<a style="padding:3px;" href="https://cybergrunge.net/shredder.html">V4:Shred+Chroma</a> <br><br>
+
+
   
 <div style="position:absolute;width:400;top:675;">
 <br>
 
 <script>
-let selected = ["RandomArt2.html","RandomArt2.html","RandomArt2.html","RandomArt.html","RandomArt2.html","RandomArt.html","RandomArt2.html","RandomArt.html"];
+let selected = ["RandomArt2.html","RandomArt2.html","RandomArt3.html","RandomArt3.html","RandomArt.html","RandomArt.html"];
 function bigbutthole(){
 document.getElementById("clicky").href = selected[Math.floor(Math.random()*selected.length)];
 }

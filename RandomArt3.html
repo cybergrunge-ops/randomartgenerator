@@ -11,91 +11,73 @@ let img7;
 let a; let d; let b;
 let filters; let r1; let r2; let randfilt1; let randfilt2;
 
+
+
+let img
+let keyed
+
 function preload(){
-colorMode(HSB, 100);
-let filters = ['DILATE','GRAY','INVERT','THRESHOLD','ERODE','BLUR, 6','BLUR,0','POSTERIZE,10','posterize,4','BLUR,10'];
-
-let r1 =random(0,9);
-let r2 =random(0,9);
-let randfilt1 = filters[r1] ;
-let randfilt2 = filters[r2] ;
-
-img1 = loadImage("tinypic18/" + int(random(1,8966)) + ".jpg");
+img = loadImage("tinypic18/" + int(random(1,8966)) + ".jpg");
 img2 = loadImage("tinypic18/" + int(random(1,8966)) + ".jpg");
 img3 = loadImage("tinypic18/" + int(random(1,8966)) + ".jpg");
-img4 = loadImage("tinypic18/" + int(random(1,8966)) + ".jpg");
-
 mask1 = loadImage("masks/mask" + int(random(1,34)) + ".png");
 mask2 = loadImage("masks/mask" + int(random(1,34)) + ".png");
-mask3 = loadImage("masks/mask" + int(random(1,31)) + ".png");
-mask4 = loadImage("masks/mask" + int(random(1,31)) + ".png");
-
-d = int(random(1,240));
-a = int(random(1,240));
-b = int(random(1,240));
-
-colorMode(HSB, 100);
-
 }
 
-
-function setup(){
-
-
-
- colorMode(HSB, 100);
- img1.resize(500,500);
+function setup() {
+ img.resize(500,500);
  img2.resize(500,500);
  img3.resize(500,500);
- img4.resize(500,500);
-createCanvas(500, 500);
-
+ mask2.resize(500,500);
+ mask1.resize(500,500);
+  createCanvas(img.width, img.height);
+  keyed = Key(img, [255, 255, 255], 233)
+	thei=random(1,40);
 }
 
-
-
-
-function draw(){
-colorMode(HSB, 100);
-
-  img1.mask(mask1);
-  img2.mask(mask2);
-  img3.mask(mask3);
-  img4.mask(mask4);
-
-
-background(random(255),random(255),random(255));
-
-blend(img1, 0, 0,500,500, 0, 0,500,500, SUBTRACT);	
-filter(THRESHOLD);
-blend(img3, 0, 0,500,500, 0, 0,500,500, DIFFERENCE);	
-blend(img4, 0, 0,500,500, 0, 0,500,500, DARKEST);	
-blend(img1, 0, 0,500,500, 0, 0,500,500, ADD);
-filter(THRESHOLD);
-let inc=random(1,120);
-let inc2=random(1,500);
-let inc3=random(1,500);
-let randlocX=random(1,500);
-let randlocY=random(-500,1200);
-let randlocX2=random(1,500);
-let randlocY2=random(-500,1200);
-
-filter(POSTERIZE,random(40));
-blend(img1, 0, 0,500,500, 0, 0,500,500, DARKEST);
-blend(img3, 0, 0,500,500, 0, 0,500,500, LIGHTEST);
-blend(img4, 0, 0,500,500, 0, 0,500,500, DARKEST);
-
-for(let i=0;i<200;i=i+inc){
-image(img1, randlocY2, i-inc3,randlocX2,randlocX2);
-}
-
-
-	
-	
-
-	
+function draw() {
 noLoop();
-}</script>
+  img2.mask(mask1);
+  image(img2, 0, 0);
+	for(i=0;i<300;i=i+thei){
+  image(keyed, 0, i-200);}
+blend(img3, 0, 0,500,500, 0, 0,500,500, DARKEST);
+}
+
+// helper for writing color to array
+function writeColor(image, x, y, red, green, blue, alpha) {
+  let index = (x + y * width) * 4;
+  image.pixels[index] = red;
+  image.pixels[index + 1] = green;
+  image.pixels[index + 2] = blue;
+  image.pixels[index + 3] = alpha;
+}
+
+function Key(image, color, level=70) {
+  image.loadPixels();
+  let out = new p5.Image(image.width, image.height)
+  out.loadPixels();
+  let keyVec = createVector(...color)
+  for (y = 0; y < image.height; y++) {
+    for (x = 0; x < image.width; x++) {
+      let col = image.get(x, y)
+      let colVec = createVector(...col)
+      let d = colVec.dist(keyVec)
+      let newCol = [...col]
+      if(d < level){
+        newCol[3] = 0
+      }
+      out.set(x, y, newCol)
+    }
+  }
+  out.updatePixels()
+  return out
+
+
+}
+
+	
+</script>
   </head>
 <title>Random Art Generator by Cybergrunge.net</title>
 	
@@ -104,8 +86,7 @@ noLoop();
 	a:hover{border:4px inset gray;background:#aaa;font-size:12px}
 	</style>
 
-  <body style="background-color:#000;color:white;">
-
+  <body style="background-color:#000;color:white;" >
 
 <a style="padding:3px;" href="RandomArt.html">Version 1</a>
 <a style="padding:3px;" href="RandomArt2.html">Hi-Contrast</a> 
@@ -130,7 +111,7 @@ created by <a href="http://cybergrunge.net/" style="color:green">www.cybergrunge
 
 If you use any images from this tool, please consider donating to CYBERGRUNGE.NET, it is greatly appreciated!<br>
 
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"><input type="hidden" name="cmd" value="_donations" /><input type="hidden" name="business" value="carrierm89@gmail.com" /><input type="hidden" name="currency_code" value="USD" /><input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" /><img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+
 </form><br><br>This tool is provided as-is for educational purposes. some images may be inappropriate. any copyrights are property of their respective owner(s), at least for the time being until intellectual property laws are completely repealed and all monopolist capitalist corporations are (peacefully) disolved.<br><br>
 </div> 
 
